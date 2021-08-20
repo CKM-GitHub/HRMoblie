@@ -11,6 +11,37 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FocusNode focusNode1 = FocusNode();
+  final FocusNode focusNode2 = FocusNode();
+  TextStyle labelStyle1 = TextStyle();
+  TextStyle labelStyle2 = TextStyle();
+  // late TextStyle labelStyle;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode1.addListener(onFocusChange);
+    focusNode2.addListener(onFocusChange);
+  }
+
+  void onFocusChange() {
+    setState(() {
+      labelStyle1 = (focusNode1.hasFocus
+          ? TextStyle(color: Colors.green)
+          : TextStyle(color: Colors.black54));
+      labelStyle2 = (focusNode2.hasFocus
+          ? TextStyle(color: Colors.green)
+          : TextStyle(color: Colors.black54));
+    });
+  }
+
+  @override
+  void dispose() {
+    focusNode1.removeListener(onFocusChange);
+    focusNode2.removeListener(onFocusChange);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,7 +67,10 @@ class _LoginState extends State<Login> {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                focusNode: focusNode1,
+                cursorColor: Colors.green,
                 decoration: InputDecoration(
+                  labelStyle: labelStyle1,
                   labelText: "Username",
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.green)),
@@ -50,8 +84,11 @@ class _LoginState extends State<Login> {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                focusNode: focusNode2,
+                cursorColor: Colors.green,
                 decoration: InputDecoration(
                   labelText: "Password",
+                  labelStyle: labelStyle2,
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.green)),
                   focusedBorder: UnderlineInputBorder(
@@ -81,7 +118,7 @@ class _LoginState extends State<Login> {
                           // ignore: prefer_const_literals_to_create_immutables
                           colors: [
                             Color.fromARGB(70, 0, 255, 0),
-                            Color.fromARGB(150, 0, 255, 0)
+                            Color.fromARGB(140, 0, 255, 0)
                           ])),
                   padding: const EdgeInsets.all(0),
                   child: Text(

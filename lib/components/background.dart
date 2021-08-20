@@ -39,7 +39,7 @@ class Background extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: Image.asset("assets/images/bottom1.png",
-                width: size.width, color: Colors.green),
+                width: size.width, color: Colors.green.shade300),
           ),
           Positioned(
             bottom: 0,
