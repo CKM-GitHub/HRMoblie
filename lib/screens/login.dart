@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 
 import 'package:flutter/material.dart';
+import 'package:hr_mobile/api/staffapi.dart';
 import 'package:hr_mobile/components/background.dart';
 
 class Login extends StatefulWidget {
@@ -15,7 +16,8 @@ class _LoginState extends State<Login> {
   final FocusNode focusNode2 = FocusNode();
   TextStyle labelStyle1 = TextStyle();
   TextStyle labelStyle2 = TextStyle();
-  // late TextStyle labelStyle;
+  final TextEditingController txtUserID = new TextEditingController();
+  final TextEditingController txtPassword = new TextEditingController();
 
   @override
   void initState() {
@@ -67,6 +69,7 @@ class _LoginState extends State<Login> {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                controller: txtUserID,
                 focusNode: focusNode1,
                 cursorColor: Colors.green,
                 decoration: InputDecoration(
@@ -84,6 +87,7 @@ class _LoginState extends State<Login> {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                controller: txtPassword,
                 focusNode: focusNode2,
                 cursorColor: Colors.green,
                 decoration: InputDecoration(
@@ -103,7 +107,9 @@ class _LoginState extends State<Login> {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               // ignore: deprecated_member_use
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  loginClick(txtUserID.text, txtPassword.text);
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
