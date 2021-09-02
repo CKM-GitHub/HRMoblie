@@ -1,10 +1,11 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:hr_mobile/screens/home.dart';
 import 'package:http/http.dart';
 
-loginClick(String user, String pwd) async {
+loginClick(String user, String pwd, BuildContext context) async {
   // String username = 'KTP';
   // String password = 'KTP12345!';
   // String basicAuth =
@@ -12,26 +13,43 @@ loginClick(String user, String pwd) async {
   // print(basicAuth);
 
   Response r = await post(
-      Uri.parse("http://192.168.43.77/HRWeb/api/staffapi/getstafflogin"),
+      Uri.parse("http://163.43.113.92/HRAPI/api/staffapi/getstafflogin"),
       // headers: <String, String>{
-      //   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      //   // "Content-Type": 'application/x-www-form-urlencoded; charset=UTF-8'
-      //   // "Content-Type": "application/json",
-      //   // // 'authorization': basicAuth,
-      //   // //"Accept": "application/json",
-      //   // "Access-Control_Allow_Origin": "*"
+      //   'authorization': basicAuth,
       // },
       body: <String, String>{"LoginName": user, "Password": pwd});
 
   dynamic jsonObject = jsonDecode(jsonDecode(r.body));
-  print(user);
-  print(pwd);
-  print(r.statusCode);
-  if (r.statusCode == 200) {
-    // If the call to the server was successful, parse the JSON
-    return print(jsonObject);
+  // print(user);
+  // print(pwd);
+  // print(r.statusCode);
+  if (jsonObject != null && jsonObject.length != 0) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => HomePage()));
+    print(jsonObject);
   } else {
-    // If that call was not successful, throw an error.
-    throw Exception('Failed to load post');
+    print("error");
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Alert!!"),
+          content: Text("Username : " +
+              user.toString() +
+              "\n" +
+              "Password : " +
+              pwd.toString() +
+              "\n" +
+              "are wrong"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

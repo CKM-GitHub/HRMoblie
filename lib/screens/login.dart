@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
               // ignore: deprecated_member_use
               child: RaisedButton(
                 onPressed: () {
-                  loginClick(txtUserID.text, txtPassword.text);
+                  loginClick(txtUserID.text, txtPassword.text, context);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
