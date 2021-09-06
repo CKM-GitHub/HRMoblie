@@ -1,15 +1,19 @@
-// ignore_for_file: prefer_const_constructors
-
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
+import 'package:hr_mobile/screens/leave.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final int staffId;
+  const HomePage(this.staffId);
+  // const HomePage(staffId, {Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  // ignore: recursive_getters
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +62,12 @@ class _HomePageState extends State<HomePage> {
       return Container(child: getChild(Icons.people_alt, "Staff"));
     }
     if (index == 1) {
-      return Container(child: getChild(Icons.ac_unit, "AAA"));
+      return GestureDetector(
+          child: getChild(Icons.ac_unit_outlined, "Leave"),
+          onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => LeavePage(widget.staffId)),
+              ));
+      // print(widget.staffId);
     }
     if (index == 2) {
       return Container(child: getChild(Icons.access_alarm_sharp, "BBB"));
@@ -88,33 +97,36 @@ class _HomePageState extends State<HomePage> {
 }
 
 getChild(image, text) {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          Icon(
-            image,
-            size: 60,
-            color: Colors.black45,
-          )
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 22,
+  return Container(
+    decoration: BoxDecoration(color: Colors.white),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            Icon(
+              image,
+              size: 60,
               color: Colors.black45,
-            ),
-          )
-        ],
-      )
-    ],
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.black45,
+              ),
+            )
+          ],
+        )
+      ],
+    ),
   );
 }

@@ -22,9 +22,11 @@ loginClick(String user, String pwd, BuildContext context) async {
   dynamic jsonObject = jsonDecode(jsonDecode(r.body));
   // print(user);
   // print(pwd);
-  // print(r.statusCode);
+  // print(r.statusCode)
+  var staffId = jsonObject[0]["ID"];
   if (jsonObject != null && jsonObject.length != 0) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => HomePage()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => HomePage(staffId)));
     print(jsonObject);
   } else {
     print("error");
@@ -52,4 +54,6 @@ loginClick(String user, String pwd, BuildContext context) async {
       },
     );
   }
+  //var staff_id = jsonObject[0]["ID"];
+  //return staff_id;
 }
