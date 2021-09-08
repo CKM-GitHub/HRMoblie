@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 import 'package:hr_mobile/screens/leave.dart';
+import 'package:hr_mobile/screens/staff_list.dart';
 
 class HomePage extends StatefulWidget {
   final int staffId;
@@ -59,7 +60,11 @@ class _HomePageState extends State<HomePage> {
 
   showData(int index) {
     if (index == 0) {
-      return Container(child: getChild(Icons.people_alt, "Staff"));
+      return GestureDetector(
+          child: getChild(Icons.people_alt, "Staff"),
+          onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => StaffList()),
+              ));
     }
     if (index == 1) {
       return GestureDetector(

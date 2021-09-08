@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hr_mobile/api/staffleaveapi.dart';
 import 'package:hr_mobile/components/custom_widget.dart';
-import 'package:hr_mobile/components/staffleave.dart';
+import 'package:hr_mobile/components/class.dart';
 
 class LeavePage extends StatefulWidget {
   final int staffId;

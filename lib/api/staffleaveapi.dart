@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
-import 'package:hr_mobile/components/staffleave.dart';
+import 'package:hr_mobile/components/class.dart';
 import 'package:http/http.dart';
 
 Future<Staff> staff(id) async {
